@@ -1,0 +1,24 @@
+# Development files
+src/
+test/
+tests/
+__tests__/
+playground/
+demo/
+examples/
+
+# Build configs
+tsconfig.json
+tsup.config.ts
+
+# Cache / logs
+node_modules/
+*.log
+*.tsbuildinfo
+
+# Version control / metadata
+.gitignore
+.npmignore
+
+# Sourcemaps (optional)
+dist/**/*.map

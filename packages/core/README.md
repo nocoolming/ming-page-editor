@@ -7,4 +7,4 @@ Minimal MVP React component library for the web editor (simple `Editor` componen
 在 monorepo 根目录运行：
 ```bash
 pnpm install
-pnpm --filter @webeditor/core build
+pnpm --filter @nocoolming/page-editor build

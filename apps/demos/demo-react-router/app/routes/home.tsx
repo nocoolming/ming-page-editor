@@ -1,7 +1,7 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import { Editor } from "@nocoolming/page-editor";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
@@ -9,5 +9,15 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <>
+      <div className="w-full h-screen flex justify-center items-center">
+
+        <h1>Hello</h1>
+
+        <Editor />
+      </div>
+    </>
+
+  )
 }

@@ -1,9 +1,24 @@
 {
-  "name": "@webeditor/core",
-  "version": "0.1.0",
+  "name": "@nocoolming/page-editor",
+  "version": "0.0.1",
   "description": "Core web editor components (minimal MVP) - a simple editable textarea component",
+  "keywords": [
+    "web-editor",
+    "react",
+    "editor"
+  ],
+  "homepage": "https://github.com/nocoolming/ming-page-editor#readme",
+  "bugs": {
+    "url": "https://github.com/nocoolming/ming-page-editor/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nocoolming/ming-page-editor.git"
+  },
+  "license": "MIT",
+  "author": "Mingming Li",
+  "module": "dist/index.mjs",
   "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
@@ -11,11 +26,13 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "build:core": "pnpm --filter ./packages/core build",
+    "publish:core": "pnpm --filter ./packages/core build && cd packages/core && npm publish --access public"
   },
-  "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18"
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "tsup": "^8.5.0",
@@ -23,11 +40,8 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0"
   },
-  "keywords": [
-    "web-editor",
-    "react",
-    "editor",
-    "mvp"
-  ],
-  "license": "MIT"
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
 }
