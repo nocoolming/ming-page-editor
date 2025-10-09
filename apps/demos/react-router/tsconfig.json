@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@my-editor/core": ["../../packages/core/src"],
+      "@my-editor/react": ["../../packages/react/src"]
+    }
+  },
+  "include": ["src"]
+}
