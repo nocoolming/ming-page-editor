@@ -6,5 +6,6 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
-  external: []
+  external: ["react", "react-dom"],
+  target: "esnext",
 });

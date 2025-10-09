@@ -1,4 +1,2 @@
-export * from "./types";
-// export * from "./model";
-// export * from "./utils";
-export * from './editor'
+export { default as Editor } from './Editor';
+export type { EditorProps } from './Editor';
