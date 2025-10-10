@@ -1,4 +1,4 @@
-import type { BlockConfig, } from "../types/types";
+import type { BlockConfig, } from "./types";
 
 export const blockConfigs: Record<string, BlockConfig> = {
     Text: {

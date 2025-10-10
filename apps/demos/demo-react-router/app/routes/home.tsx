@@ -1,5 +1,4 @@
 import type { Route } from "./+types/home";
-import { Editor } from "@nocoolming/page-editor";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -15,7 +14,7 @@ export default function Home() {
 
         <h1>Hello</h1>
 
-        <Editor />
+        {/* <MingEditor /> */}
       </div>
     </>
 

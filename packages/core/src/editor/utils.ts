@@ -1,4 +1,4 @@
-import type { Block } from "../types/types";
+import type { Block } from "./types";
 
 export function uid(prefix = 'b') {
     const time = Date.now().toString(36);

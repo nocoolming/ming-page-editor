@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import type { Block } from "../types/types";
+import type { Block } from "./types";
 import { get, insert, removeById } from './utils';
 
 export class EditorStore {

@@ -5,7 +5,7 @@ import {
     type DragEndEvent,
 } from '@dnd-kit/core';
 import { PaletteItem } from './PaletteItem';
-import type { Block } from '../types/types';
+import type { Block } from './types';
 import {
     findParentAndIndex,
     insert,
@@ -19,7 +19,7 @@ import { EditorBlock } from './EditorBlock';
 import { observer } from 'mobx-react-lite';
 import { Inspector } from './Inspector';
 
-const App = observer(function App() {
+const MingEditor = observer(function App() {
     function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
 
@@ -196,7 +196,7 @@ const App = observer(function App() {
     }
 
     return (
-        < DndContext
+        <DndContext
             // sensors={sensors}
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
@@ -236,4 +236,4 @@ const App = observer(function App() {
     );
 });
 
-export default App;
+export default MingEditor;

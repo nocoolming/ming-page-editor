@@ -1,3 +1,3 @@
 export * from './DropAreaRoot';
-export * from './Editor';
+export * from './MingEditor';
 export * from './EditorBlock';

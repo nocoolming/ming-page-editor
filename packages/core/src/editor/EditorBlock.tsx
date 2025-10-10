@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import type { Block } from "../types/types";
+import type { Block } from "./types";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import { blockConfigs } from "./blogConfigs";
 import { store } from "./store";
@@ -18,7 +18,7 @@ export const EditorBlock = observer(function EditorBlock({ block }: { block: Blo
     } = useDraggable({
         id: block.id,
         type: block.type
-    })
+    } as any )
 
     // container drop area when acceptsChildren === true
     const containerDropId = `container:${block.id}`;
