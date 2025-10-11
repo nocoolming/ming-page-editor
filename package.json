@@ -32,12 +32,8 @@
 
     "@react-router/node": "^7.7.1",
     "@react-router/serve": "^7.7.1",
-    "isbot": "^5.1.27",
-    "mobx": "^6.13.7",
-    "mobx-react-lite": "^4.1.0",
-    "nanoid": "^5.1.5",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "react-router": "^7.7.1",
     "react-router-dom": "^7.8.1",
     "uuid": "^11.1.0"
@@ -56,8 +52,8 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "peerDependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "packageManager": "pnpm@10.18.1+sha512.77a884a165cbba2d8d1c19e3b4880eee6d2fcabd0d879121e282196b80042351d5eb3ca0935fa599da1dc51265cc68816ad2bddd2a2de5ea9fdf92adbec7cd34"
 }

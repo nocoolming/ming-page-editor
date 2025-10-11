@@ -5,4 +5,10 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  optimizeDeps: {
+    include: ["react", "react-dom"]
+  },
+  ssr: {
+    noExternal: ["@nocoolming/page-editor"]
+  }
 });

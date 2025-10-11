@@ -1,5 +1,7 @@
 import type { Route } from "./+types/home";
 
+import { MingEditor } from '@nocoolming/page-editor';
+
 export function meta({ }: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
@@ -9,14 +11,16 @@ export function meta({ }: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <>
-      <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-screen flex flex-col ">
 
-        <h1>Hello</h1>
+      <h1>Hello</h1>
 
-        {/* <MingEditor /> */}
+
+      <div className="grow">
+
+        <MingEditor />
       </div>
-    </>
+    </div>
 
   )
 }

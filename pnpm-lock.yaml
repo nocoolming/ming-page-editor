@@ -14,23 +14,11 @@ importers:
       '@react-router/serve':
         specifier: ^7.7.1
         version: 7.9.4(react-router@7.9.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(typescript@5.9.3)
-      isbot:
-        specifier: ^5.1.27
-        version: 5.1.31
-      mobx:
-        specifier: ^6.13.7
-        version: 6.15.0
-      mobx-react-lite:
-        specifier: ^4.1.0
-        version: 4.1.1(mobx@6.15.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      nanoid:
-        specifier: ^5.1.5
-        version: 5.1.6
       react:
-        specifier: ^19.1.0
+        specifier: ^19.2.0
         version: 19.2.0
       react-dom:
-        specifier: ^19.1.0
+        specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
       react-router:
         specifier: ^7.7.1
@@ -91,10 +79,10 @@ importers:
         specifier: ^5.1.31
         version: 5.1.31
       react:
-        specifier: ^19.1.1
+        specifier: ^19.2.0
         version: 19.2.0
       react-dom:
-        specifier: ^19.1.1
+        specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
       react-router:
         specifier: ^7.9.2
@@ -110,7 +98,7 @@ importers:
         specifier: ^22
         version: 22.18.9
       '@types/react':
-        specifier: ^19.1.13
+        specifier: ^19.2.0
         version: 19.2.2
       '@types/react-dom':
         specifier: ^19.1.9
@@ -142,25 +130,52 @@ importers:
       '@dnd-kit/utilities':
         specifier: ^3.2.2
         version: 3.2.2(react@19.2.0)
+      isbot:
+        specifier: ^5.1.27
+        version: 5.1.31
+      mobx:
+        specifier: ^6.13.7
+        version: 6.15.0
+      mobx-react-lite:
+        specifier: ^4.1.0
+        version: 4.1.1(mobx@6.15.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      nanoid:
+        specifier: ^5.1.5
+        version: 5.1.6
       react:
-        specifier: ^19.1.0
+        specifier: ^19.2.0
         version: 19.2.0
       react-dom:
-        specifier: ^19.1.0
+        specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
+      uuid:
+        specifier: ^11.1.0
+        version: 11.1.0
     devDependencies:
+      '@tailwindcss/vite':
+        specifier: ^4.1.4
+        version: 4.1.14(vite@6.3.6(@types/node@22.18.9)(jiti@2.6.1)(lightningcss@1.30.1))
       '@types/react':
-        specifier: ^19.1.2
+        specifier: ^19.2.0
         version: 19.2.2
       '@types/react-dom':
-        specifier: ^19.1.2
+        specifier: ^19.2.0
         version: 19.2.1(@types/react@19.2.2)
+      tailwindcss:
+        specifier: ^4.1.4
+        version: 4.1.14
       tsup:
         specifier: ^8.5.0
         version: 8.5.0(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)
       typescript:
         specifier: ^5.8.3
         version: 5.9.3
+      vite:
+        specifier: ^6.3.3
+        version: 6.3.6(@types/node@22.18.9)(jiti@2.6.1)(lightningcss@1.30.1)
+      vite-tsconfig-paths:
+        specifier: ^5.1.4
+        version: 5.1.4(typescript@5.9.3)(vite@6.3.6(@types/node@22.18.9)(jiti@2.6.1)(lightningcss@1.30.1))
 
 packages:
 
@@ -2594,6 +2609,13 @@ snapshots:
       tailwindcss: 4.1.14
       vite: 6.3.6(@types/node@20.19.20)(jiti@2.6.1)(lightningcss@1.30.1)
 
+  '@tailwindcss/vite@4.1.14(vite@6.3.6(@types/node@22.18.9)(jiti@2.6.1)(lightningcss@1.30.1))':
+    dependencies:
+      '@tailwindcss/node': 4.1.14
+      '@tailwindcss/oxide': 4.1.14
+      tailwindcss: 4.1.14
+      vite: 6.3.6(@types/node@22.18.9)(jiti@2.6.1)(lightningcss@1.30.1)
+
   '@tailwindcss/vite@4.1.14(vite@7.1.9(@types/node@22.18.9)(jiti@2.6.1)(lightningcss@1.30.1))':
     dependencies:
       '@tailwindcss/node': 4.1.14
@@ -3601,7 +3623,7 @@ snapshots:
       debug: 4.4.3
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 6.3.6(@types/node@20.19.20)(jiti@2.6.1)(lightningcss@1.30.1)
+      vite: 7.1.9(@types/node@20.19.20)(jiti@2.6.1)(lightningcss@1.30.1)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -3622,7 +3644,7 @@ snapshots:
       debug: 4.4.3
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 6.3.6(@types/node@22.18.9)(jiti@2.6.1)(lightningcss@1.30.1)
+      vite: 7.1.9(@types/node@22.18.9)(jiti@2.6.1)(lightningcss@1.30.1)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -3644,6 +3666,17 @@ snapshots:
       tsconfck: 3.1.6(typescript@5.9.3)
     optionalDependencies:
       vite: 6.3.6(@types/node@20.19.20)(jiti@2.6.1)(lightningcss@1.30.1)
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+
+  vite-tsconfig-paths@5.1.4(typescript@5.9.3)(vite@6.3.6(@types/node@22.18.9)(jiti@2.6.1)(lightningcss@1.30.1)):
+    dependencies:
+      debug: 4.4.3
+      globrex: 0.1.2
+      tsconfck: 3.1.6(typescript@5.9.3)
+    optionalDependencies:
+      vite: 6.3.6(@types/node@22.18.9)(jiti@2.6.1)(lightningcss@1.30.1)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -3683,6 +3716,20 @@ snapshots:
       tinyglobby: 0.2.15
     optionalDependencies:
       '@types/node': 22.18.9
+      fsevents: 2.3.3
+      jiti: 2.6.1
+      lightningcss: 1.30.1
+
+  vite@7.1.9(@types/node@20.19.20)(jiti@2.6.1)(lightningcss@1.30.1):
+    dependencies:
+      esbuild: 0.25.10
+      fdir: 6.5.0(picomatch@4.0.3)
+      picomatch: 4.0.3
+      postcss: 8.5.6
+      rollup: 4.52.4
+      tinyglobby: 0.2.15
+    optionalDependencies:
+      '@types/node': 20.19.20
       fsevents: 2.3.3
       jiti: 2.6.1
       lightningcss: 1.30.1

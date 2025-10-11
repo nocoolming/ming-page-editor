@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import {
     DndContext,
     closestCenter,
@@ -19,7 +19,7 @@ import { EditorBlock } from './EditorBlock';
 import { observer } from 'mobx-react-lite';
 import { Inspector } from './Inspector';
 
-const MingEditor = observer(function App() {
+export const MingEditor = observer(function App() {
     function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
 
@@ -91,7 +91,6 @@ const MingEditor = observer(function App() {
         }
 
     }
-
 
     function dropSomeItem(block: Block, overId: string) {
         const parentInfo = findParentAndIndex(store.blocks, overId);
@@ -201,7 +200,7 @@ const MingEditor = observer(function App() {
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
         >
-            <div className='flex flex-row gap-3 min-h-screen bg-gray-50'>
+            <div className='flex flex-row gap-3 min-h-full h-full bg-gray-50'>
                 {/* 左侧： 固定宽度 */}
                 <div className='w-48 border bg-white p-3'>
                     <h2 className='font-semibold mb-3'>
@@ -228,12 +227,12 @@ const MingEditor = observer(function App() {
                 </div>
 
                 {/* 右侧： 固定宽度  */}
-                            <Inspector/>
+                <Inspector />
             </div>
-           
+
         </DndContext >
 
     );
 });
 
-export default MingEditor;
+// export  MingEditor;
