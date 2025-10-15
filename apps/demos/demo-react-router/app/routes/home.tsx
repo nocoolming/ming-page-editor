@@ -1,5 +1,4 @@
 import type { Route } from "./+types/home";
-
 import { MingEditor } from '@nocoolming/page-editor';
 
 export function meta({ }: Route.MetaArgs) {

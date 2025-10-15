@@ -12,6 +12,8 @@ export interface BlockConfig {
   acceptsChildren?: boolean;
 }
 
+
+
 export type Block = {
   id: string;
   type: string;
@@ -21,7 +23,24 @@ export type Block = {
   children: Block[];
 };
 
+// 暂时格式和puck看齐
+export interface ComponentConfig {
+
+  fields: FieldConfig[];
+  render: (props: Record<string, any>, children?: React.ReactNode) => React.ReactNode;
+  acceptsChildren?: boolean;
+}
+
+export interface Component {
+  id: string;
+  type: string;
+  props: Record<string, any>;
+  defaultProps: Record<string, any>;
+  parentId: string;
+  children: Block[];
+}
+
 export type Config = {
-  components: Block;
+  components: Component;
 
 }
