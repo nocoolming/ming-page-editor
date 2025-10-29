@@ -1,5 +1,7 @@
+import { useState } from "react";
 import type { Route } from "./+types/home";
-import { MingEditor } from '@nocoolming/page-editor';
+import MingEditor from "@nocoolming/page-editor/src/editor/MingEditor";
+import {config} from '../config'
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -9,17 +11,36 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return (
-    <div className="w-full h-screen flex flex-col ">
+  const [data, setData] = useState(
+    {
+        body: [
+            {
+                "id": "bSI6emfWPqthOV9CyaQbx",
+                "type": "Heading",
+                "props": { "value": "11" }
+            },
+            {
+                "id": "y9vcO8hMRZ-J2McAUsC8z",
+                "type": "Container",
+                "props": {
+                    "children": [
+                        { "id": "Flbsx433JkyX6KGJwCuaw", "type": "Heading", "props": { "value": "3" } },
+                        { "id": "imu7wC-lsQMI6msEYcZT3", "type": "Heading", "props": { "value": "4" } }]
+                }
+            }],
+        header: [],
+        footer: []
+    }
+);
 
-      <h1>Hello</h1>
+return (
+    <>
+        <p>{JSON.stringify(data)}</p>
+        <MingEditor
+            data={data}
+            onChange={e => setData(e)}
+            config={config} />
+    </>
+)
 
-
-      <div className="grow">
-
-        <MingEditor />
-      </div>
-    </div>
-
-  )
 }

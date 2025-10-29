@@ -1,238 +1,151 @@
-// import React, { useState } from 'react';
 import {
-    DndContext,
     closestCenter,
-    type DragEndEvent,
-} from '@dnd-kit/core';
-import { PaletteItem } from './PaletteItem';
-import type { Block } from './types';
-import {
-    findParentAndIndex,
-    insert,
-    isDescendant,
-    removeById,
-    uid
-} from './utils';
-import { store } from './store';
-import { DropAreaRoot } from './DropAreaRoot';
-import { EditorBlock } from './EditorBlock';
-import { observer } from 'mobx-react-lite';
-import { Inspector } from './Inspector';
+    DndContext,
+    KeyboardSensor,
+    PointerSensor,
+    useSensor,
+    useSensors
+} from "@dnd-kit/core";
+import { componentStore } from "./store/ComponentStore";
+import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { SortableItem } from "./render/SortableItem";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
+import type { Config } from "./config/type";
+import CurrentForm from "./CurrentForm";
+import ComponentList from "./ComponentList";
+import type { ComponentData, Data } from "./config/Data";
 
-export const MingEditor = observer(function App() {
-    function handleDragEnd(event: DragEndEvent) {
-        const { active, over } = event;
+function MingEditor({ config, data, onChange }
+    : {
+        config: Config,
+        data: Data,
+        onChange: (e) => void
+    }) {
+    useEffect(() => {
+        componentStore.init(data.body || []);
+    }, []);
 
-
-        if (!active) {
-            return;
-        }
-
-        // console.log(`active: ${JSON.stringify(active)}`);
-        // console.log(`over: ${JSON.stringify(over)}`)
-
-        const activeId = String(active.id);
-        const overId = over ? String(over.id) : null;
-
-
-        console.log(`activeId: ${activeId}, overId: ${overId}`)
-
-        // debugger;
-
-        if (activeId.startsWith('palette:') && overId) {
-            const type = activeId.replace('palette:', '');
-
-            const block: Block = {
-                id: uid(),
-                type,
-                props: blockFactory(type),
-                defaultProps: null,
-                parentId: null,
-                children: [],
-            }
-
-
-            if (overId === 'root') {
-                return addBlock(block, overId);
-            }
-
-            // dorp some item -> 插入到该item前面（同级）
-            dropSomeItem(block, overId);
-
-            // existing block move (drag activeId is block.id)
-            moveBlockToNewPosition(activeId, overId);
-
-            return;
-        }
-
-    }
-
-    function addBlock(block: Block, overId: string) {
-
-        // drop to root
-        if (overId === 'root') {
-            store.add(block, null);
-
-            return;
-        }
-
-        // drop to cotainer area
-        if (overId.startsWith("container:")) {
-            const pid = overId.replace("container:", "");
-            store.add(block, pid);
-            return;
-        }
-
-        // drop to container area
-        if (overId.startsWith("container:")) {
-            const pid = overId.replace("container:", '');
-            store.add(block, pid);
-            return;
-        }
-
-    }
-
-    function dropSomeItem(block: Block, overId: string) {
-        const parentInfo = findParentAndIndex(store.blocks, overId);
-
-        let parentId = null;
-        let index = -1
-        if (parentInfo) {
-            parentId = parentInfo.parentId;
-            index = parentInfo.index;
-        }
-
-        store.add(block, parentId);
-
-        // then move to position if index >= 0 (we just appended; adjust)
-        if (index >= 0) {
-            //remove appended and insert at position:
-            const {
-                tree: removedTree,
-                removed
-            } = removeById(store.blocks, block.id);
-
-            if (removed) {
-                store.blocks = insert(removedTree, parentId, index, removed);
-            }
-
-            return;
-        }
-
-    }
-
-    function moveBlockToNewPosition(activeId: string, overId: string) {
-        const movingId = activeId;
-
-        // prevent drop onto itself
-        if (movingId === overId) {
-            return;
-        }
-
-        // drop to root
-        if (overId === 'root') {
-            store.moveBlock(movingId, null);
-            return;
-        }
-
-        // drop to container area
-        if (overId.startsWith('container:')) {
-            const pid = overId.replace('container:', '');
-            // prevent dropping into its own descendant
-            if (isDescendant(store.blocks, movingId, pid)) {
-                return;
-            }
-            store.moveBlock(movingId, pid);
-            return;
-        }
-
-        // drop on an item -> insert before it on same parent
-        const where = findParentAndIndex(store.blocks, overId);
-        if (!where) {
-            return;
-        }
-
-        if (isDescendant(store.blocks, movingId, where.parentId ?? '')) {
-            return;
-        }
-
-        // move and place before index
-        store.moveBlock(movingId, where.parentId);
-
-        // No adjust order: remove then insert at index
-        const {
-            tree: removedTree,
-            removed
-        } = removeById(store.blocks, movingId);
-        if (removed) {
-            store.blocks =
-                insert(
-                    removedTree,
-                    where.parentId,
-                    where.index,
-                    removed
-                );
-        }
-    }
-
-    function blockFactory(type: string) {
-        switch (type) {
-            case 'Text': {
-                return {
-                    text: 'hello',
-                }
-            }
-            case 'Image': {
-                return {
-                    src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5116TDzM1UxPIFzhYm1pc147Er5VK9ZZ0iw&s',
-                    alt: 'test',
-                }
-            }
-                defualt: {
-                    return {}
-                }
-        }
-    }
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    );
 
     return (
         <DndContext
-            // sensors={sensors}
             collisionDetection={closestCenter}
-            onDragEnd={handleDragEnd}
-        >
-            <div className='flex flex-row gap-3 min-h-full h-full bg-gray-50'>
-                {/* 左侧： 固定宽度 */}
-                <div className='w-48 border bg-white p-3'>
-                    <h2 className='font-semibold mb-3'>
-                        Blocks</h2>
+            sensors={sensors}
+            onDragEnd={handleDragEnd}>
+            <div className="flex flex-row gap-3">
+                <div className="px-3 py-2 w-96 bg-blue-800">
+                    <h2>Blocks</h2>
 
-                    <ul className='space-y-2'>
-                        <PaletteItem name={"Text"} />
-                        <PaletteItem name="Image" />
-                        <PaletteItem name="Container" />
-                    </ul>
+                    <ComponentList list={Object.keys(config.components)} />
                 </div>
 
-                {/* 中间填充 */}
-                <div className='flex-1'>
-                    <DropAreaRoot>
-                        <>
-                            {
-                                store.blocks.map(b => (
-                                    <EditorBlock key={b.id} block={b} />
-                                ))
-                            }
-                        </>
-                    </DropAreaRoot>
+                <div className="flex justify-center px-2 grow h-screen">
+                    <div className="flex flex-col gap-3 w-full">
+                        <SortableContext
+                            strategy={verticalListSortingStrategy}
+                            items={componentStore.components} >
+                            <div id='root'>
+                                {
+                                    componentStore.components.map(
+                                        i => <SortableItem key={i.id} component={{ ...i }} config={config} />
+                                    )
+                                }
+                            </div>
+                        </SortableContext>
+                    </div>
                 </div>
 
-                {/* 右侧： 固定宽度  */}
-                <Inspector />
+                <div className="w-96 px-3 py-6 bg-yellow-50">
+                    <h2>Form</h2>
+
+                    <CurrentForm
+                        config={config}
+                        onChange={e => onChange({
+                            ...data,
+                            body: componentStore.components
+                        })} />
+                </div>
             </div>
 
-        </DndContext >
+        </DndContext>
+    )
 
-    );
-});
+    function handleDragEnd(event) {
+        const { active, over } = event;
 
-// export  MingEditor;
+        console.log(`active id: ${active.id}, overId: ${over ? over.id : over}`)
+        const blockName = active.id.replace('tools-', '');
+        // debugger;
+        if (!over) {
+            // 空画布
+
+            const c = componentStore.getNewComponentDataInstance(blockName, config);
+            const result = componentStore.addComponentToContainer(
+                componentStore.components,
+                'root',
+                c,
+            );
+
+            componentStore.init(result);
+
+            const d = {
+                ...data,
+                body: componentStore.components
+            }
+
+            console.log(JSON.stringify(d));
+
+            onChange(d)
+            // store.addBlock(blockName, config);
+            return;
+        }
+
+        if (active.id !== over.id) {
+            if (active.id.startsWith('tools-')) {
+                // debugger;
+
+                const c = componentStore.getNewComponentDataInstance(blockName, config);
+
+                const newData = componentStore.add(
+                    componentStore.components,
+                    c,
+                    over.id
+                );
+
+                componentStore.init(newData);
+                // const newData = componentStore.addComponentToContainer(
+                //     componentStore.components,
+                //     containerId,
+                //     c,
+                // );
+
+                // console.log(newData);
+                // componentStore.init(newData);
+
+                onChange({
+                    ...data,
+                    body: componentStore.components
+                })
+                return;
+            }
+
+            componentStore.moveComponent(active.id, over.id);
+            // componentStore.init(d);
+            // console.log(JSON.stringify(d));
+
+
+            // console.log(JSON.stringify(componentStore.components));
+
+        }
+
+
+    }
+}
+
+export default observer(MingEditor)
