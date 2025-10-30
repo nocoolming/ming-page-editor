@@ -17,15 +17,22 @@
   },
   "license": "MIT",
   "author": "Mingming Li",
-  "main": "./dist/index.mjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup src/index.ts --watch --dts",
+    "build": "vite build",
+    "dev": "vite build --watch",
     "prepublishOnly": "pnpm build",
     "build:core": "pnpm --filter ./packages/core build",
     "publish:core": "pnpm --filter ./packages/core build && cd packages/core && npm publish --access public"
@@ -47,9 +54,10 @@
     "@types/react-dom": "^19.2.0",
     "nanoid": "^5.1.6",
     "tailwindcss": "^4.1.4",
-    "tsup": "^8.5.0",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",
+    "vite-plugin-css-injected-by-js": "^3.5.2",
+    "vite-plugin-dts": "^4.5.4",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "peerDependencies": {
