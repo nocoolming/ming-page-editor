@@ -16,7 +16,7 @@ import CurrentForm from "./CurrentForm";
 import ComponentList from "./ComponentList";
 import type { ComponentData, Data } from "./config/Data";
 
-function MingEditor({ config, data, onChange }
+function Editor({ config, data, onChange }
     : {
         config: Config,
         data: Data,
@@ -148,4 +148,4 @@ function MingEditor({ config, data, onChange }
     }
 }
 
-export default observer(MingEditor)
+export const MingEditor = observer(Editor)

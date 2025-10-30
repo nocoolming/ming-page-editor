@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { config } from '../config'
-import MingEditor from "@nocoolming/page-editor/src/editor/MingEditor";
+import { MingEditor } from "@nocoolming/page-editor/src/editor/MingEditor";
 
 function Editor() {
     const [data, setData] = useState(
