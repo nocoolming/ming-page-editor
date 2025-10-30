@@ -36,7 +36,7 @@ export default function Home() {
 
     return (
         <>
-            <p>{JSON.stringify(data)}</p>
+            {/* <p>{JSON.stringify(data)}</p> */}
             <MingEditor
                 data={data}
                 onChange={e => setData(e)}

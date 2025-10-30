@@ -39,8 +39,10 @@ function Editor({ config, data, onChange }
             sensors={sensors}
             onDragEnd={handleDragEnd}>
             <div className="flex flex-row gap-3">
-                <div className="px-3 py-2 w-96 bg-blue-800">
-                    <h2>Blocks</h2>
+                <div className="px-3 py-2 w-96 border-r-1 border-lime-300">
+                    <h2 
+                        className="my-5 text-green-400 text-4xl"
+                    >Blocks</h2>
 
                     <ComponentList list={Object.keys(config.components)} />
                 </div>
