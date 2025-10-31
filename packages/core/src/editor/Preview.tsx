@@ -15,7 +15,13 @@ export function Preview({ config, data }:
                 data.map(
                     item => {
 
-                        return <Component config={config} key={item.id} component={item} />
+                        return (
+                            <Component
+                                config={config}
+                                key={item.id}
+                                component={item}
+                                deep={1} />
+                        )
                     }
                 )
             }
@@ -23,7 +29,23 @@ export function Preview({ config, data }:
     )
 }
 
-function Component({ config, component }: { config: Config, component: ComponentData }) {
+function Component(
+    {
+        config,
+        component,
+        deep = 1
+    }:
+        {
+            config: Config,
+            component: ComponentData,
+            deep: number
+        }) {
+
+    if (deep > 10) {
+        return <></>
+    }
+    deep++;
+
     if (component.type === 'Container') {
         return (
             <>
@@ -32,7 +54,8 @@ function Component({ config, component }: { config: Config, component: Component
                         <Component
                             config={config}
                             key={c.id}
-                            component={c} />))
+                            component={c}
+                            deep={deep} />))
 
                 }
             </>

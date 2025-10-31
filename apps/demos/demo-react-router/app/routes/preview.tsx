@@ -10,25 +10,30 @@ export function meta(): Route.MetaArgs {
 }
 
 export default function PreviewPage() {
+    const data = [
+        {
+            "id": "bSI6emfWPqthOV9CyaQbx",
+            "type": "Heading",
+            "props": { "value": "11" }
+        },
+        {
+            "id": "y9vcO8hMRZ-J2McAUsC8z",
+            "type": "Container",
+            "props": {
+                "children": [
+                    { "id": "Flbsx433JkyX6KGJwCuaw", "type": "Heading", "props": { "value": "3" } },
+                    { "id": "imu7wC-lsQMI6msEYcZT3", "type": "Heading", "props": { "value": "4" } }]
+            }
+        }];
+
     return (
         <>
+            {/* <p>Preview page</p> */}
+
+            {/* <p>{JSON.stringify(data)}</p> */}
             <Preview
                 config={config}
-                data={[
-                    {
-                        "id": "bSI6emfWPqthOV9CyaQbx",
-                        "type": "Heading",
-                        "props": { "value": "11" }
-                    },
-                    {
-                        "id": "y9vcO8hMRZ-J2McAUsC8z",
-                        "type": "Container",
-                        "props": {
-                            "children": [
-                                { "id": "Flbsx433JkyX6KGJwCuaw", "type": "Heading", "props": { "value": "3" } },
-                                { "id": "imu7wC-lsQMI6msEYcZT3", "type": "Heading", "props": { "value": "4" } }]
-                        }
-                    }]} />
+                data={data} />
         </>
     )
 }
