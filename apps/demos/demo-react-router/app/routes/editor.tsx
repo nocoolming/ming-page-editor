@@ -1,9 +1,17 @@
-
 import { useState } from "react";
+import type { Route } from "./+types/home";
 import { config } from '../config'
+import '../app.css'
 import { MingEditor } from "@nocoolming/page-editor";
 
-function Editor() {
+export function meta({ }: Route.MetaArgs) {
+    return [
+        { title: "New React Router App" },
+        { name: "description", content: "Welcome to React Router!" },
+    ];
+}
+
+export default function Editor() {
     const [data, setData] = useState(
         {
             body: [
@@ -28,7 +36,7 @@ function Editor() {
 
     return (
         <>
-            <p>{JSON.stringify(data)}</p>
+            {/* <p>{JSON.stringify(data)}</p> */}
             <MingEditor
                 data={data}
                 onChange={e => setData(e)}
@@ -36,10 +44,4 @@ function Editor() {
         </>
     )
 
-
-
-
-
 }
-
-export default Editor;

@@ -3,6 +3,7 @@ import type { Route } from "./+types/home";
 import { config } from '../config'
 import '../app.css'
 import { MingEditor } from "@nocoolming/page-editor";
+import { Link } from "react-router";
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -35,13 +36,16 @@ export default function Home() {
     );
 
     return (
-        <>
-            {/* <p>{JSON.stringify(data)}</p> */}
-            <MingEditor
-                data={data}
-                onChange={e => setData(e)}
-                config={config} />
-        </>
+        <div className="flex justify-center items-center h-screen">
+            <ul className="flex flex-col gap-5">
+                <li>
+                    <Link to='preview'>Preview</Link>
+                </li>
+                <li>
+                    <Link to='editor'>Editor</Link>
+                </li>
+            </ul>
+        </div>
     )
 
 }
