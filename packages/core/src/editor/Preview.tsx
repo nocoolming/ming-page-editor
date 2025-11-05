@@ -4,7 +4,7 @@ import type { ComponentData, Data } from "./config/Data";
 export function Preview({ config, data }:
     {
         config: Config,
-        data: Data
+        data: ComponentData[]
     }
 ) {
     return (

@@ -1,6 +1,6 @@
 {
   "name": "@nocoolming/page-editor",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Core web editor components (minimal MVP) - a simple editable textarea component",
   "keywords": [
     "web-editor",
